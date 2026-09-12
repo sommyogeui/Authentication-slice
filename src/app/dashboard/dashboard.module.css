@@ -1,0 +1,78 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  background-color: var(--color-background);
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--shape-large);
+  padding: var(--spacing-xxl);
+  box-shadow: var(--elevation-level2);
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background-color: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--shape-full);
+  font-size: var(--label-large-font-size);
+  font-weight: var(--label-large-font-weight);
+  margin-bottom: var(--spacing-lg);
+}
+
+.title {
+  font-size: var(--headline-medium-font-size);
+  line-height: var(--headline-medium-line-height);
+  font-weight: var(--headline-medium-font-weight);
+  color: var(--color-on-surface);
+  margin-bottom: var(--spacing-sm);
+}
+
+.userName {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.text {
+  font-size: var(--body-large-font-size);
+  line-height: var(--body-large-line-height);
+  color: var(--color-on-surface-variant);
+  margin-bottom: var(--spacing-xl);
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.signOutButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--accessibility-minimum-touch-target);
+  background-color: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--shape-full);
+  padding: 0 var(--spacing-xl);
+  font-size: var(--label-large-font-size);
+  font-weight: var(--label-large-font-weight);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.signOutButton:hover {
+  background-color: var(--color-error-container);
+  color: var(--color-on-error-container);
+}

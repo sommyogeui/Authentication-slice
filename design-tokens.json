@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "name": "StudyFlow Design System",
+    "designSystem": "Material Design 3 inspired",
+    "theme": "Purple",
+    "version": "1.0.0"
+  },
+  "color": {
+    "primary": "#6D28D9",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#E9DDFF",
+    "onPrimaryContainer": "#25005A",
+    "secondary": "#625B71",
+    "onSecondary": "#FFFFFF",
+    "secondaryContainer": "#E8DEF8",
+    "onSecondaryContainer": "#1E192B",
+    "error": "#BA1A1A",
+    "onError": "#FFFFFF",
+    "errorContainer": "#FFDAD6",
+    "onErrorContainer": "#410002",
+    "background": "#FFFBFE",
+    "onBackground": "#1C1B1F",
+    "surface": "#FFFBFE",
+    "onSurface": "#1C1B1F",
+    "surfaceVariant": "#E7E0EC",
+    "onSurfaceVariant": "#49454F",
+    "outline": "#79747E",
+    "outlineVariant": "#CAC4D0",
+    "success": "#146C2E",
+    "warning": "#7A5900"
+  },
+  "typography": {
+    "fontFamily": {
+      "brand": "Roboto",
+      "plain": "Roboto",
+      "fallback": "Arial, sans-serif"
+    },
+    "displayLarge": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "3.5625rem",
+      "lineHeight": "4rem"
+    },
+    "headlineLarge": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "2rem",
+      "lineHeight": "2.5rem"
+    },
+    "headlineMedium": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "1.75rem",
+      "lineHeight": "2.25rem"
+    },
+    "headlineSmall": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "1.5rem",
+      "lineHeight": "2rem"
+    },
+    "titleLarge": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "1.375rem",
+      "lineHeight": "1.75rem"
+    },
+    "titleMedium": {
+      "fontFamily": "Roboto",
+      "fontWeight": 500,
+      "fontSize": "1rem",
+      "lineHeight": "1.5rem"
+    },
+    "bodyLarge": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "1rem",
+      "lineHeight": "1.5rem"
+    },
+    "bodyMedium": {
+      "fontFamily": "Roboto",
+      "fontWeight": 400,
+      "fontSize": "0.875rem",
+      "lineHeight": "1.25rem"
+    },
+    "labelLarge": {
+      "fontFamily": "Roboto",
+      "fontWeight": 500,
+      "fontSize": "0.875rem",
+      "lineHeight": "1.25rem"
+    }
+  },
+  "spacing": {
+    "none": "0",
+    "xxs": "0.125rem",
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "0.75rem",
+    "lg": "1rem",
+    "xl": "1.5rem",
+    "xxl": "2rem",
+    "xxxl": "3rem",
+    "huge": "4rem"
+  },
+  "shape": {
+    "none": "0",
+    "extraSmall": "0.25rem",
+    "small": "0.5rem",
+    "medium": "0.75rem",
+    "large": "1rem",
+    "extraLarge": "1.75rem",
+    "full": "9999px"
+  },
+  "elevation": {
+    "level0": "none",
+    "level1": "0 1px 2px rgba(0,0,0,0.08)",
+    "level2": "0 2px 6px rgba(0,0,0,0.10)",
+    "level3": "0 4px 12px rgba(0,0,0,0.12)"
+  },
+  "state": {
+    "hoverOpacity": 0.08,
+    "focusOpacity": 0.12,
+    "pressedOpacity": 0.12,
+    "focusRing": {
+      "width": "0.1875rem",
+      "color": "#6D28D9"
+    }
+  },
+  "accessibility": {
+    "minimumTouchTarget": "3rem",
+    "focusVisible": true,
+    "doNotUseColorAloneForErrors": true,
+    "labelsRequiredForInputs": true
+  }
+}

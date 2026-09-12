@@ -1,0 +1,105 @@
+:root {
+  --color-primary: #6D28D9;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #E9DDFF;
+  --color-on-primary-container: #25005A;
+  --color-secondary: #625B71;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #E8DEF8;
+  --color-on-secondary-container: #1E192B;
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #410002;
+  --color-background: #FFFBFE;
+  --color-on-background: #1C1B1F;
+  --color-surface: #FFFBFE;
+  --color-on-surface: #1C1B1F;
+  --color-surface-variant: #E7E0EC;
+  --color-on-surface-variant: #49454F;
+  --color-outline: #79747E;
+  --color-outline-variant: #CAC4D0;
+  --color-success: #146C2E;
+  --color-warning: #7A5900;
+
+  --font-family-brand: Roboto;
+  --font-family-plain: Roboto;
+  --font-family-fallback: Arial, sans-serif;
+
+  --display-large-font-family: Roboto;
+  --display-large-font-weight: 400;
+  --display-large-font-size: 3.5625rem;
+  --display-large-line-height: 4rem;
+
+  --headline-large-font-family: Roboto;
+  --headline-large-font-weight: 400;
+  --headline-large-font-size: 2rem;
+  --headline-large-line-height: 2.5rem;
+
+  --headline-medium-font-family: Roboto;
+  --headline-medium-font-weight: 400;
+  --headline-medium-font-size: 1.75rem;
+  --headline-medium-line-height: 2.25rem;
+
+  --headline-small-font-family: Roboto;
+  --headline-small-font-weight: 400;
+  --headline-small-font-size: 1.5rem;
+  --headline-small-line-height: 2rem;
+
+  --title-large-font-family: Roboto;
+  --title-large-font-weight: 400;
+  --title-large-font-size: 1.375rem;
+  --title-large-line-height: 1.75rem;
+
+  --title-medium-font-family: Roboto;
+  --title-medium-font-weight: 500;
+  --title-medium-font-size: 1rem;
+  --title-medium-line-height: 1.5rem;
+
+  --body-large-font-family: Roboto;
+  --body-large-font-weight: 400;
+  --body-large-font-size: 1rem;
+  --body-large-line-height: 1.5rem;
+
+  --body-medium-font-family: Roboto;
+  --body-medium-font-weight: 400;
+  --body-medium-font-size: 0.875rem;
+  --body-medium-line-height: 1.25rem;
+
+  --label-large-font-family: Roboto;
+  --label-large-font-weight: 500;
+  --label-large-font-size: 0.875rem;
+  --label-large-line-height: 1.25rem;
+
+  --spacing-none: 0;
+  --spacing-xxs: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.5rem;
+  --spacing-xxl: 2rem;
+  --spacing-xxxl: 3rem;
+  --spacing-huge: 4rem;
+
+  --shape-none: 0;
+  --shape-extra-small: 0.25rem;
+  --shape-small: 0.5rem;
+  --shape-medium: 0.75rem;
+  --shape-large: 1rem;
+  --shape-extra-large: 1.75rem;
+  --shape-full: 9999px;
+
+  --elevation-level0: none;
+  --elevation-level1: 0 1px 2px rgba(0,0,0,0.08);
+  --elevation-level2: 0 2px 6px rgba(0,0,0,0.10);
+  --elevation-level3: 0 4px 12px rgba(0,0,0,0.12);
+
+  --state-hover-opacity: 0.08;
+  --state-focus-opacity: 0.12;
+  --state-pressed-opacity: 0.12;
+  --state-focus-ring-width: 0.1875rem;
+  --state-focus-ring-color: #6D28D9;
+
+  --accessibility-minimum-touch-target: 3rem;
+}

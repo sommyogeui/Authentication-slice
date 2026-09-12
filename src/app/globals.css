@@ -1,0 +1,56 @@
+/*
+ * globals.css — StudyFlow Authentication Slice
+ *
+ * Imports the design-token CSS custom properties that are the single source
+ * of truth for all visual values (colour, typography, spacing, shape,
+ * elevation, state). See styles/design-tokens.css and design-tokens.json.
+ *
+ * This file applies only base resets and font wiring. All component-level
+ * styles belong in the components or pages that use them.
+ */
+
+/* Design token custom properties — do not duplicate values from this file */
+@import "../../styles/design-tokens.css";
+
+/* Base reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  /* Roboto is loaded via next/font/google in layout.tsx and applied via --font-roboto */
+  font-family: var(--font-roboto, var(--font-family-brand)), var(--font-family-fallback);
+  color: var(--color-on-background);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Prevent horizontal overflow on all viewports */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Visible focus rings using the design token values — required by accessibility rules */
+:focus-visible {
+  outline: var(--state-focus-ring-width) solid var(--state-focus-ring-color);
+  outline-offset: 2px;
+}

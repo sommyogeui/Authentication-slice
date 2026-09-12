@@ -1,0 +1,93 @@
+// Prisma schema for StudyFlow Assessment 1 — Authentication Slice only.
+// Database: PostgreSQL
+// ORM: Prisma
+//
+// Models defined support:
+// - User (FR-01, FR-02, FR-06)
+// - EmailVerification (FR-05)
+// - PasswordResetToken (FR-08)
+// - Session (FR-07, custom server-side session in PostgreSQL)
+// - RateLimit (FR-04, server-side rate limiting in PostgreSQL)
+//
+// No tables for study plans, materials, notes, AI jobs, profiles, or subscriptions.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Justified by: FR-01 (account creation), FR-02 (password security), FR-06 (sign in).
+// emailVerified tracks whether the user has completed email verification (FR-05).
+// passwordHash stores the bcrypt hash only — never the plaintext password.
+// email is unique at the database level (FR-01, database-schema rule §4).
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  emailVerifications  EmailVerification[]
+  passwordResetTokens PasswordResetToken[]
+  sessions            Session[]
+}
+
+// Justified by: FR-05 (email verification, code expiry, resend cooldown).
+// Stores one record per verification attempt.
+// code is a cryptographically random 6-digit numeric value (crypto.randomInt),
+// unique to each user, delivered by Nodemailer (SMTP).
+// expiresAt is the server-authoritative expiry — never derived from the client timer.
+// A new record is created on each resend, allowing the server to enforce the cooldown.
+model EmailVerification {
+  id        String   @id @default(cuid())
+  userId    String
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Justified by: FR-08 (time-limited, single-use password reset tokens).
+// usedAt is null when the token has not been used.
+// The server checks both expiresAt and usedAt before accepting a reset request.
+// After a successful reset, usedAt is set, making the token permanently invalid.
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime? // null = unused; non-null = already consumed
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Justified by: FR-07 (server-side session management).
+// Stored in PostgreSQL. Browser receives only an opaque random session identifier in HttpOnly cookie.
+// expiresAt determines session validity server-side.
+model Session {
+  id        String   @id // Cryptographically random opaque token (e.g. 64-hex char)
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Justified by: FR-04 (rate-limiting state stored in PostgreSQL).
+// Key represents the rate limit bucket (e.g., action + IP / identifier).
+// count tracks attempts within the window; expiresAt is the window reset timestamp.
+model RateLimit {
+  key       String   @id
+  count     Int      @default(1)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
