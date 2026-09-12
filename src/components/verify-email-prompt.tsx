@@ -150,8 +150,9 @@ export default function VerifyEmailPrompt({ email }: { email: string }) {
             id="verify-code"
             name="code"
             type="text"
-            maxLength={64}
-            placeholder="Paste your verification code"
+            inputMode="numeric"
+            maxLength={6}
+            placeholder="Enter your 6-digit code"
             autoComplete="one-time-code"
             required
             className={`${authStyles.input} ${
@@ -159,7 +160,9 @@ export default function VerifyEmailPrompt({ email }: { email: string }) {
             }`}
             style={{ fontFamily: "monospace", letterSpacing: "0.05em" }}
             value={code}
-            onChange={(e) => setCode(e.target.value.trim())}
+            onChange={(e) =>
+              setCode(e.target.value.trim().replace(/[^\d]/g, ""))
+            }
             onBlur={handleBlur}
             disabled={isVerifying}
           />

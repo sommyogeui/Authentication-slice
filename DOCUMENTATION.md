@@ -9,7 +9,7 @@ This document provides a comprehensive technical overview of the StudyFlow Asses
 The StudyFlow Authentication Slice is a focused, production-grade authentication subsystem built for StudyFlow Assessment 1. It is deliberately constrained to the account lifecycle and access control boundaries:
 
 - **Account Creation**: Full name, email address, and strong password registration with database-enforced email uniqueness.
-- **Email Verification**: Server-generated cryptographically random verification codes sent via Nodemailer (SMTP), with server-authoritative expiration (15 minutes) and server-enforced resend cooldown (60 seconds).
+- **Email Verification**: Server-generated cryptographically random verification codes sent via Nodemailer (SMTP), with server-authoritative expiration (6 minutes) and server-enforced resend cooldown (60 seconds).
 - **Credentials Sign-In**: Authentication verified using bcrypt against salted hashes, requiring email verification prior to granting access.
 - **Custom Server-Side Session Management**: Secure, opaque session identifiers stored in PostgreSQL and delivered to the browser exclusively through an `HttpOnly`, `SameSite=Lax`, `Secure` cookie.
 - **Protected Dashboard**: A minimal server-rendered destination verifying session validity and email verification status on the server before rendering, redirecting unauthenticated requests.
@@ -74,7 +74,7 @@ sequenceDiagram
     Note over User,SMTP: Flow 1: Registration & Verification
     User->>App: POST /api/auth/signup (name, email, password)
     App->>App: Validate with Zod & hash with bcrypt (12 rounds)
-    App->>DB: Insert User & EmailVerification (64-char code)
+    App->>DB: Insert User & EmailVerification (6-digit code)
     App->>SMTP: Deliver verification code to email
     App-->>User: 201 Created -> Redirect to /verify-email
     User->>App: POST /api/auth/verify-email (email, code)
@@ -138,8 +138,8 @@ The PostgreSQL schema is defined in `prisma/schema.prisma` with 5 focused models
 ### 2. `EmailVerification`
 - `id String @id @default(cuid())`: Unique record identifier.
 - `userId String`: Foreign key referencing `User.id` (`onDelete: Cascade`).
-- `code String`: Cryptographically random 64-character verification code.
-- `expiresAt DateTime`: Server-authoritative expiration timestamp (15 minutes from generation).
+- `code String`: Six-digit numeric verification code.
+- `expiresAt DateTime`: Server-authoritative expiration timestamp (6 minutes from generation).
 - `createdAt DateTime @default(now())`: Used by server to enforce the 60-second resend cooldown.
 
 ### 3. `PasswordResetToken`
