@@ -76,13 +76,16 @@ export async function POST(request: Request) {
       );
     }
 
+    // Return a neutral response for already-verified accounts to avoid
+    // confirming whether a specific email address belongs to a verified account.
     if (user.emailVerified) {
       return NextResponse.json(
         {
-          error: "This email address is already verified. Please sign in.",
-          alreadyVerified: true,
+          success: true,
+          message:
+            "If an unverified account exists with this email, a new code has been sent.",
         },
-        { status: 400 }
+        { status: 200 }
       );
     }
 
@@ -123,12 +126,23 @@ export async function POST(request: Request) {
     });
 
     // 6. Deliver Code via Nodemailer
-    await sendVerificationCodeEmail(user.email, newCode);
+    const emailResult = await sendVerificationCodeEmail(user.email, newCode);
+    if (!emailResult.success) {
+      console.error(
+        "[Resend Code] Verification email delivery failed for userId:",
+        user.id,
+        "—",
+        emailResult.error ?? "unknown error"
+      );
+    }
 
     return NextResponse.json(
       {
         success: true,
         message: "A new verification code has been sent to your email.",
+        // Return the server-authoritative cooldown so the client does not
+        // need to hardcode a separate value that could drift from tokens.ts.
+        cooldownRemaining: RESEND_COOLDOWN_SECONDS,
       },
       { status: 200 }
     );

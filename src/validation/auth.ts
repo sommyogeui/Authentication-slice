@@ -41,6 +41,11 @@ export const signUpSchema = z.object({
 });
 
 // FR-06: Sign in
+// Note: password is intentionally validated with only a non-empty check here.
+// Applying the full passwordSchema (uppercase, number, special char rules) would
+// incorrectly reject existing passwords that pre-date any future rule changes.
+// The server uses bcrypt.compare against the stored hash — structural rules are
+// irrelevant at the verification stage.
 export const signInSchema = z.object({
   email: z
     .string()
@@ -69,7 +74,7 @@ export const resendVerificationSchema = z.object({
     .email("Please enter a valid email address"),
 });
 
-// FR-11: Forgot password request
+// FR-08: Forgot password request (initiates the password-reset flow)
 export const forgotPasswordSchema = z.object({
   email: z
     .string()

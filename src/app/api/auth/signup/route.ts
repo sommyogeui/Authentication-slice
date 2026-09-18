@@ -117,7 +117,19 @@ export async function POST(request: Request) {
     }
 
     // 7. Deliver Verification Code via Nodemailer
-    await sendVerificationCodeEmail(newUser.email, verificationCode);
+    const emailResult = await sendVerificationCodeEmail(
+      newUser.email,
+      verificationCode
+    );
+    if (!emailResult.success) {
+      // Log server-side only to preserve traceability without leaking internals
+      console.error(
+        "[Signup] Verification email delivery failed for userId:",
+        newUser.id,
+        "—",
+        emailResult.error ?? "unknown error"
+      );
+    }
 
     // 8. Return Success (no secrets, no code, no password hash exposed)
     return NextResponse.json(

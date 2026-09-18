@@ -48,7 +48,7 @@ export default function VerifyEmailPrompt({ email }: { email: string }) {
       setStatusMessage(
         data.message || "A new verification code has been sent to your email."
       );
-      setCooldown(60);
+      setCooldown(data.cooldownRemaining ?? 60);
     } catch {
       setStatusMessage(null);
       setErrorMessage("Unable to reach the server. Please try again.");

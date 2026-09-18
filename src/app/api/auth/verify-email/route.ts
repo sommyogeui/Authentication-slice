@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
     const { email, code } = validation.data;
 
-    // 2. Find User
+    // 3. Find User
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -72,7 +72,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // 3. Find the Most Recent Verification Code for User
+    // 4. Find the Most Recent Verification Code for User
     const latestVerification = await prisma.emailVerification.findFirst({
       where: { userId: user.id },
       orderBy: { createdAt: "desc" },
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // 4. Server-Authoritative Expiry Check (Never trust client timer)
+    // 5. Server-Authoritative Expiry Check (Never trust client timer)
     const now = new Date();
     if (latestVerification.expiresAt < now) {
       return NextResponse.json(
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // 5. Verify Code Match
+    // 6. Verify Code Match
     if (latestVerification.code !== code) {
       return NextResponse.json(
         { error: "Invalid verification code. Please check and try again." },
@@ -105,13 +105,13 @@ export async function POST(request: Request) {
       );
     }
 
-    // 6. Update User as Verified in Database
+    // 7. Update User as Verified in Database
     await prisma.user.update({
       where: { id: user.id },
       data: { emailVerified: true },
     });
 
-    // 7. Establish Authenticated Session
+    // 8. Establish Authenticated Session
     await createSession(user.id);
 
     return NextResponse.json(

@@ -92,7 +92,17 @@ export async function POST(request: Request) {
       process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
     const resetUrl = `${baseUrl}/reset-password?token=${token}`;
 
-    await sendPasswordResetEmail(user.email, resetUrl);
+    const emailResult = await sendPasswordResetEmail(user.email, resetUrl);
+    if (!emailResult.success) {
+      // Log the failure server-side only. The neutral response is intentionally
+      // preserved to prevent account enumeration — never disclose SMTP errors to the client.
+      console.error(
+        "[Forgot Password] SMTP delivery failed for userId:",
+        user.id,
+        "—",
+        emailResult.error ?? "unknown error"
+      );
+    }
 
     return NextResponse.json(neutralResponse, { status: 200 });
   } catch (error) {
